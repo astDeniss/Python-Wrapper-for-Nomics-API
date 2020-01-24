@@ -17,7 +17,7 @@ class Currencies(BaseServerUrl):
         :param convert: (:type str): Currency to quote ticker price, market cap, and volume values.
         May be a Fiat Currency or Cryptocurrency. Default is 'USD'.
 
-        :return:
+        :return: data as JSON object.
         """
         url = self.base_url + "/currencies/ticker?key=" + self.api_key
 
@@ -30,7 +30,6 @@ class Currencies(BaseServerUrl):
         response = requests.get(url, params=parameters)
 
         if int(response.status_code) == 200:
-            data = response.json()
-            return data
+            return response
         else:
-            return "{} --> {}".format(response.status_code, response.text)
+            return "Error: {} --> {}".format(response.status_code, response.text)
